@@ -1,0 +1,48 @@
+.TH errors "3" "December 2023" "Programming" "Error Functions"
+.SH NAME
+result_t, errors_strerror, fatal, errors_fatal, errors_facility_name
+.SH SYNOPSIS
+.nf
+.B # include	"errors/errors.h"
+.PP
+.B result_t 
+// uint32_t err:1,reserved:7,facility:8,errno:16
+.PP
+.BI "result_t	"ERRORS_ENCODE( "facility,errcode)
+.PP
+.BI "unsigned	"ERRORS_ERR( "result)
+.PP
+.BI "unsigned	"ERRORS_FACILITY( "result)
+.PP
+.BI "unsigned	"ERRORS_ERRNO( "result)
+.PP
+.BI "char*	errors_strerror (result_t " result)
+.PP
+.BI "void	fatal (char* " fmt, ...)
+.PP
+.BI "void	errors_fatal (result_t " result ", char* " fmt, ...)
+.PP
+.BI "char*	errors_facility_name (result_t " result)
+
+.SH DESCRIPTION
+.nf
+.PP
+A few routine for encoding and decoding error returns in a single
+32 bit unsigned integer.  Each library or application can augment
+the system errno returns by defining a new facility.
+.PP
+The ERRORS_* macros do the encoding and encoding with bit shift
+and masks (not bitfields.)
+.PP
+The error message corresponding to the facility and error code is
+returned by errors_strerror().  To emit a formatted error message
+errors_fatal will expand any %m in fmt with the error message
+returned by errors_strerror().
+.SH EXAMPLE
+.nf
+result_t	result	= ERRORS_ENCODE(ERRORS_FACILITY_GLIBC, ENOMEM);
+...
+errors_fatal (result, "creating object [%m]");
+ERROR: {GLIBC} progname: creating object [Cannot allocate memory]
+.SH BUGS
+
