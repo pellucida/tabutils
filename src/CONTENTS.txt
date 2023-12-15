@@ -1,0 +1,55 @@
+
+Contents
+
+Supporting Code
+
+[vec]
+A simple generic vector (array) library under src/vec
+
+	_append (vec, x);
+	_insert (vec, size_t i, x);
+	_put (vec, size_t i, x);
+	_replace (vec, size_t i, x);
+	_clear (vec, size_t i);
+	_remove (vec, size_t i);
+	_get (vec, size_t i, x*);
+	_used (vec);
+	_size (vec);
+
+that attempts to pick up most common mistakes.
+
+[tabset]
+Any enumerated list of tab stops are stored as differences from the
+previous tab stop in an instance of the vec abstraction while
+repeated tabstop are stored as the repeat value.
+This is encapsulated in src/tabset
+ 
+	_next (tabset, current_position);
+	_Make (&tabset, enumerated_stops, repeated_stops);
+
+[errors]
+Error reporting and processing is combined in a few routines
+under src/errors/
+
+	typedef	result_t;
+	char*	errors_strerror (result_t result);
+	char*	errors_facility (result_t result);
+	void	fatal (char* fmt, ...);
+	void	errors_fatal (result_t result, char* fmt, ...);
+	char*	errors_facility_name (result_t result);
+
+[bitfields]
+A few macros and simple functions are provided under src/bitfield
+which packs and unpacks bit fields in hopefully portable manner,
+
+[utils]
+src/utils simple routines that most systems already have, and
+
+[mem]
+src/mem a few memory macros to avert some simple typo sort of 
+allocation errors.
+
+Application 
+
+[tabutils]
+The two executables detab and entab are found under src/tabutils
