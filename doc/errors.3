@@ -31,18 +31,22 @@ A few routine for encoding and decoding error returns in a single
 32 bit unsigned integer.  Each library or application can augment
 the system errno returns by defining a new facility.
 .PP
-The ERRORS_* macros do the encoding and encoding with bit shift
+The \fBERRORS_*\fR macros do the encoding and encoding with bit shift
 and masks (not bitfields.)
 .PP
 The error message corresponding to the facility and error code is
-returned by errors_strerror().  To emit a formatted error message
-errors_fatal will expand any %m in fmt with the error message
-returned by errors_strerror().
+returned by \fBerrors_strerror()\fR.  To emit a formatted error message
+\fBerrors_fatal\fR will expand any \fB%m\fR in \fIfmt\fR with the error message
+returned by \fBerrors_strerror()\fR.
+.PP
+Client facilities provide <\fIfacility\fR>_\fBstrerror\fR (\fBint\fR errno) and
+<\fIfacility\fR>_\fBfacility\fR (\fBvoid\fR) functions whose addresses are compiled
+into \fIerrors/errors.c\fR
 .SH EXAMPLE
 .nf
-result_t	result	= ERRORS_ENCODE(ERRORS_FACILITY_GLIBC, ENOMEM);
+\fBresult_t\fR	result	= \fBERRORS_ENCODE\fR (\fIERRORS_FACILITY_GLIBC\fR, \fIENOMEM\fR);
 ...
-errors_fatal (result, "creating object [%m]");
-ERROR: {GLIBC} progname: creating object [Cannot allocate memory]
+\fBerrors_fatal\fR (\fIresult\fR, "creating object [%m]");
+ERROR: {glibc} progname: creating object [Cannot allocate memory]
 .SH BUGS
-
+Many I suspect.
