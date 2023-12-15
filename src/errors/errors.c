@@ -11,69 +11,48 @@
 # include	"errors/errors.h"
 # include	"utils/utils.h"
 
+# include	"vec/vec_errors.h"
+# include	"tabset/tabset_errors.h"
+# include	"tabutils/tabutils_errors.h"
+
 # define	TSIZE(x)	(sizeof(x)/sizeof(x[0]))
 
-// Application supplied message list - for _strerror()
+char	errors_no_error[]	= "No error";
+char	errors_unknown_error[]	= "Unknown error";
+char	errors_unknown_facility[]	= "Unknown facility";
 
-extern	error_messages_t	vec_messages;
-extern	error_messages_t        tabset_messages;
-extern	error_messages_t        tabutils_messages;
-
-// Table of message lists indexed by facility
-
-error_messages_t*	error_messages_tab[]	= {
-	[ERRORS_FACILITY_GLIBC]	=	0,
-	[ERRORS_FACILITY_VEC]	=	&vec_messages,
-	[ERRORS_FACILITY_TABSET]	=	&tabset_messages,
-	[ERRORS_FACILITY_TABUTILS]	=	&tabutils_messages,
+errors_strerror_t*	errors_messages_table[]	= {
+	[ERRORS_FACILITY_GLIBC]	= strerror,
+	[ERRORS_FACILITY_VEC]	=	vec_errors_strerror,
+	[ERRORS_FACILITY_TABSET]	=	tabset_errors_strerror,
+	[ERRORS_FACILITY_TABUTILS]	=	tabutils_errors_strerror,
 };
 
-error_messages_table_t	error_messages_tables	= {
-	.n_tables	= TSIZE(error_messages_tab),
-	.messages	= error_messages_tab,
-};
-
-static	result_t	errors_facility_messages (error_messages_t** fmpp, unsigned facility) {
-	result_t	retval	= err;
-	if (facility < error_messages_tables.n_tables) {
-		error_messages_t**	messages	= error_messages_tables.messages;
-		error_messages_t*	fmsg	= messages [facility];
-		*fmpp	= fmsg;
-		retval	= ok;
-	}
-	return	retval;
+typedef	char*	errors_facility_t (void);
+static	char*	glibc_errors_facility (void) {
+	return	"glibc";
 }
+errors_facility_t*	errors_facility_table[]	= {
+	[ERRORS_FACILITY_GLIBC]	= glibc_errors_facility,
+	[ERRORS_FACILITY_VEC]	=	vec_errors_facility,
+	[ERRORS_FACILITY_TABSET]	=	tabset_errors_facility,
+	[ERRORS_FACILITY_TABUTILS]	=	tabutils_errors_facility,
+};
 
 char*	errors_strerror (result_t result) {
-	char*	msg	= "Unknown facility";
+	char*	msg	= errors_unknown_facility;
 	unsigned	facility	= ERRORS_FACILITY( result);
-	unsigned	erno	=	ERRORS_ERRNO( result);
-	if (facility==ERRORS_FACILITY_GLIBC) {
-		msg	= strerror (erno);
-	}
-	else	{
-		error_messages_t*	errmsg	= 0;
-		result_t	rv	= errors_facility_messages (&errmsg, facility);
-		if (rv==ok) {
-			if (erno < errmsg->n_messages) {
-				msg	= errmsg->messages[erno];
-			}
-			else	{
-				msg	= "Unknown error";
-			}
-		}
+	if (facility < TSIZE(errors_messages_table)) {
+		unsigned	erno	=	ERRORS_ERRNO( result);
+		msg	= errors_messages_table [facility] (erno);
 	}
 	return	msg;
 }
 char*	errors_facility_name (result_t result) {
 	unsigned	facility	= ERRORS_FACILITY( result);
-	char*	name	= "GLIBC";
-	if (facility != ERRORS_FACILITY_GLIBC){
-		error_messages_t*	errmsg	= 0;
-		result_t	rv	= errors_facility_messages (&errmsg, facility);
-		if (rv==ok) {
-			name	= errmsg->facility_name;
-		}
+	char*	name	= errors_unknown_facility;
+	if (facility < TSIZE(errors_messages_table)) {
+		name	= errors_facility_table [facility] ();
 	}
 	return	name;
 }

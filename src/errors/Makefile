@@ -1,5 +1,5 @@
 
-CFLAGS	+= -g -I.. 
+CFLAGS	+= -g -I.. # -DUSE_SYS_ERRLIST
 
 OBJ	= errors.o
 

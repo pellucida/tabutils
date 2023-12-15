@@ -53,20 +53,15 @@ enum	{
 # define	ERRORS_TABSET( code)	ERRORS_ENCODE( ERRORS_FACILITY_TABSET, code)
 # define	ERRORS_TABUTILS( code)	ERRORS_ENCODE( ERRORS_FACILITY_TABUTILS, code)
 
-struct	error_messages_t	{
-	size_t	n_messages;
-	char*	facility_name;
-	char**	messages;
-};
-typedef	struct	error_messages_t	error_messages_t;
 
-struct	error_messages_table_t	{
-	size_t	n_tables;
-	error_messages_t**	messages;
-};
-typedef	struct	error_messages_table_t	error_messages_table_t;
+extern	char	errors_no_error[];
+extern	char	errors_unknown_error[];
+extern	char	errors_unknown_facility[];
+
+typedef	char*	errors_strerror_t (int erno);
 
 char*	errors_strerror (result_t result);
+char*	errors_facility (result_t result);
 void	fatal (char* fmt, ...);
 void	errors_fatal (result_t result, char* fmt, ...);
 char*	errors_facility_name (result_t result);
