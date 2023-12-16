@@ -23,14 +23,12 @@
 # include	<string.h>
 # include	<stdlib.h>
 # include	<stdarg.h>
-# include	<stdint.h>
 # include	<errno.h>
 
 # include	"errors/errors.h"
 # include	"utils/utils.h"
 # include	"tabset/tabset.h"
 # include	"tabutils/tabutils_errors.h"
-
 
 static	void	Usage (){
 	char*	prog	= progname ();
@@ -63,7 +61,9 @@ int	main (int argc, char* argv[]) {
 	int	sp	= 0;	// length of run of spaces
 
 
+# if	!defined( HAVE_PROGRAM_INVOCATION_SHORT_NAME)
 	progname_set (argv[0], "entab");
+# endif
 
 	while ((opt = getopt (argc, argv, "E:ZFht:T:"))!=EOF) {
 		switch (opt) {

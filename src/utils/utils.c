@@ -14,6 +14,7 @@ void	spaces (FILE* output, size_t n){
 		fputc (' ', output);
 	}
 }
+# if	!defined( HAVE_BASENAME)
 char*	basename (char* s) {
 	char*	result	= s;
 	char*	t	= strrchr (s, '/');
@@ -22,6 +23,9 @@ char*	basename (char* s) {
 	}
 	return	result;
 }
+# endif
+
+# if	!defined( HAVE_PROGRAM_INVOCATION_SHORT_NAME)
 char*	progname_util (int what, char* argv0, char* fallback) {
 	static	char*	progname	= 0; 
 	char*	result	= progname;
@@ -35,6 +39,7 @@ char*	progname_util (int what, char* argv0, char* fallback) {
 	}
 	return	result;
 }
+# endif
 // --------------------------------------------------
 // convert 'str' to into positive number [0..n]]
 //

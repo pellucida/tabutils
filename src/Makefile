@@ -2,7 +2,9 @@
 DEFINES	= -Delt_t=uint8_t
 INCLUDES	= -I..
 
+EXTRA	= -D_GNU_SOURCE -DHAVE_BASENAME -DHAVE_PROGRAM_INVOCATION_SHORT_NAME
 CFLAGS	+= $(INCLUDES) $(DEFINES) 
+CFLAGS	+= $(EXTRA)
 
 DIRS	= errors utils vec tabset tabutils
 

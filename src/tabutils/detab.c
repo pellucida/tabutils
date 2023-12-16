@@ -37,7 +37,9 @@ int	main (int argc, char* argv[]) {
 	pos_t	p	= 0;
 	char*	repeat	= 0;
 
+# if    !defined( HAVE_PROGRAM_INVOCATION_SHORT_NAME)
 	progname_set (argv[0], "detab");
+# endif
 
 	while ((opt = getopt (argc, argv, "ht:T:"))!=EOF) {
 		switch (opt) {

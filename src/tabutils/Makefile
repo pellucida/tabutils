@@ -2,7 +2,7 @@
 SUPPORT	=  ../utils/utils.o ../tabset/tabset.o ../vec/vec.o
 SUPPORT	+= ../errors/errors.o ../tabutils/tabutils_errors.o ../tabset/tabset_errors.o ../vec/vec_errors.o
 
-CFLAGS	+= -I.. -g -Delt_t=uint8_t
+CFLAGS	+= -I.. -g -Delt_t=uint8_t 
 PROGS	+= entab detab
 
 all:	$(PROGS)
