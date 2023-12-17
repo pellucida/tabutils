@@ -63,3 +63,8 @@ a\\tb\\tc\\td\\te\\tf\\tg
 1\\t234567\\t8901234567890123456789
 .SH BUGS
 Doesn't make any allowance for backspace characters.
+
+The implementation of enumerated tab stops requires an array of \fIline length\fR bytes and enumerated tab stops cannot be more than separated by more than \fI255\fR character position.
+
+The handling of embedded tabs by \fBentab\fR is a hack at best.
+

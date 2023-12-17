@@ -5,7 +5,7 @@ result_t, errors_strerror, fatal, errors_fatal, errors_facility_name
 .nf
 .B # include	"errors/errors.h"
 .PP
-.B result_t 
+.BI "typedef	uint32_t	"result_t;
 // uint32_t err:1,reserved:7,facility:8,errno:16
 .PP
 .BI "result_t	"ERRORS_ENCODE( "facility,errcode)
