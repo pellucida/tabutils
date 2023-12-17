@@ -38,6 +38,9 @@ a  b  c   d   e      f      g
 
 #### Bugs
 Doesn't make any allowance for back space characters.
+
+The implementation of enumerated tab stops requires an array of **line length** bytes and enumerated tab stops cannot be more than separated by more than **255** character position.
+
 The handling of embedded tabs by **entab** is a hack at best.
 
 #### License
