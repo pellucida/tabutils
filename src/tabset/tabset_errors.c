@@ -14,6 +14,7 @@ static  char*   tabset_error_messages [] = {
         [NOT_ASCENDING] = "Tab position must be strictly ascending",
         [NOT_POSITIVE]  = "Positive number expected",
         [NUMBER_TOO_BIG]        = "Tab stop too far from previous stop", 
+        [INVALID_SEPARATOR]        = "Tab list has invalid separator", 
 };
 
 char*	tabset_errors_strerror (int erno){

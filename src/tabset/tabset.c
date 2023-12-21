@@ -218,6 +218,10 @@ result_t	tabs_parse (vec_t* stops, char* tabstr) {
 				tabs	= next+1;
 				previous	= pos;
 			}
+			else	{
+				result	= ERRORS_TABSET (INVALID_SEPARATOR);
+				tabs	= 0;
+			}
 		}
 	}
 	return	result;

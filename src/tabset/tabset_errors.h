@@ -8,6 +8,7 @@ enum	{
 	NOT_ASCENDING   = 1,
 	NOT_POSITIVE    = 2,
 	NUMBER_TOO_BIG  = 3,
+	INVALID_SEPARATOR	= 4,
 };
 
 char*	tabset_errors_strerror (int erno);

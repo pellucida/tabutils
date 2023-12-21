@@ -147,18 +147,20 @@ int	main (int argc, char* argv[]) {
 			break;
 			}
 		}
-		else {
+		else { // ch != ' ' and ch != \t
 			if (sp > 0) {
 				spaces (output, sp);
-				sp	= 0;
 			}
 			fputc (ch, output);
 			if (ch == '\n') {
 				pos	= 0;
 				tabstop	= tabset_next (tabset, pos);
 			}
+			sp	= 0;
 		}
-		if (pos == tabstop) {
+// pos+1 is where we are going to plonk the next char.
+// Is is a tabstop?
+		if (pos+1 == tabstop) {
 			if (F_flag || sp > 0) {
 				if (sp == 1 && Z_flag) {
 					spaces (output, sp);
