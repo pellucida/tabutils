@@ -34,7 +34,7 @@ int	main (int argc, char* argv[]) {
 	FILE*	input	= stdin;
 	FILE*	output	= stdout;
 	int	ch	= EOF;
-	pos_t	p	= 0;
+	pos_t	p	= 0;	// position last printed
 	char*	repeat	= 0;
 
 # if    !defined( HAVE_PROGRAM_INVOCATION_SHORT_NAME)
@@ -72,10 +72,11 @@ int	main (int argc, char* argv[]) {
 			p	= 0;
 		}
 		else if (ch == '\t') {
-			pos_t	pos	= tabset_next (tabset, p);
-			if (pos > p) {
-				spaces (output, pos-p);
-				p	= pos;
+			pos_t	tabpos	= tabset_next (tabset, p);
+// /*D*/	fprintf (stderr, "tabpos_next (%u) = %u\n", p, tabpos);
+			if (p < tabpos) {
+				spaces (output, tabpos-p);
+				p	= tabpos;
 			}
 		}
 		else {
