@@ -3,7 +3,7 @@
 Two simple programs to expand tabs set at specified positions into spaces and
 the reverse.
 
-I had a recent need to do this but couldn't find an obvious program but I vaguely remembered converting a small program from *Software Tools in Pascal*  (Kernighan and  Plauger, 1981.) 
+I had a recent need to do this but couldn't find an obvious program but I vaguely remembered converting a small program from *Software Tools in Pascal*<sup>1</sup>  (Kernighan and  Plauger, 1981.) 
 
 #### Synopsis
 
@@ -38,10 +38,14 @@ a  b  c   d   e      f      g
 
 #### Bugs
 Doesn't make any allowance for back space characters.
-
-The implementation of enumerated tab stops requires an array of **line length** bytes and enumerated tab stops cannot be more than separated by more than **255** character position.
+The maximum tab position in an enumerated list (-t) is UINT16_MAX
+but no other restrictions.
 
 The handling of embedded tabs by **entab** is a hack at best.
+
+#### See Also
+1.[Software tools in Pascal](https://openlibrary.org/books/OL4258115M/Software_tools_in_Pascal) pages 41 (detab) and 33 (entab)
+[Software Tools in Pascal Source Code](https://github.com/jchenry/software-tools)
 
 #### License
 [Creative Commons CC0](http://creativecommons.org/publicdomain/zero/1.0/legalcode)

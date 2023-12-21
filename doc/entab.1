@@ -62,9 +62,10 @@ a\\tb\\tc\\td\\te\\tf\\tg
 \fBOutput\fR
 1\\t234567\\t8901234567890123456789
 .SH BUGS
+.TP
 Doesn't make any allowance for backspace characters.
-
-The implementation of enumerated tab stops requires an array of \fIline length\fR bytes and enumerated tab stops cannot be more than separated by more than \fI255\fR character position.
-
+.TP
+Enumerated tab positions can be set from 1 to UINT16_MAX but otherwise no restrictions.
+.TP
 The handling of embedded tabs by \fBentab\fR is a hack at best.
 

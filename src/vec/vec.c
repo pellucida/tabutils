@@ -12,19 +12,6 @@
 # include	"vec/vec.h"
 # include	"vec/vec_errors.h"
 
-struct	vec_t	{
-	size_t	size;
-	size_t	used;
-	elt_t*	vec;
-};
-
-size_t	vec_used (vec_t* ts) {
-	return	 ts->used;
-}
-size_t	vec_size (vec_t* ts) {
-	return	 ts->size;
-}
-
 // Note: only _append() and _put() place values after [used-1]
 // _put(i,x) initializes vec[used..i-1] before setting vec[i]==x
 
@@ -82,15 +69,6 @@ result_t	vec_get (vec_t* ts, size_t i, elt_t* x) {
 	}
 	return	result;
 }
-result_t	vec_replace (vec_t* ts, size_t i, elt_t x) {
-	result_t	result	= ERRORS_VEC (NOT_INITIALIZED);
-	
-	if (i < ts->used) {
-		ts->vec [i]	= x;
-		result	= ok;
-	}
-	return	result;
-}
 result_t	vec_put (vec_t* ts, size_t i, elt_t x) {
 	result_t	result	= ok;
 	size_t	used	= ts->used;
@@ -109,17 +87,6 @@ result_t	vec_put (vec_t* ts, size_t i, elt_t x) {
 		}
 	}
 	else	result	= ERRORS_VEC (WOULD_OVERWRITE);
-	return	result;
-}
-result_t	vec_append (vec_t* ts, elt_t pos) {
-	return	vec_put (ts, ts->used, pos);
-}
-result_t	vec_clear (vec_t* ts, size_t i) {
-	result_t	result	= ERRORS_VEC (NOT_INITIALIZED);
-	
-	if (i < ts->used) {
-		ts->vec [i]	= 0;
-	}
 	return	result;
 }
 result_t	vec_remove (vec_t* ts, size_t i){

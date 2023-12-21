@@ -1,5 +1,5 @@
 
-CFLAGS	+= -I.. -g -Delt_t=uint8_t
+CFLAGS	+= -I.. -g -Delt_t=uint8_t 
 
 OBJ	= vec.o vec_errors.o
 

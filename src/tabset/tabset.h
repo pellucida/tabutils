@@ -13,8 +13,14 @@ typedef	uint16_t 	pos_t;
 typedef	elt_t	delta_t;
 typedef	struct	tabset_t	tabset_t;
 struct	tabset_t {
-	vec_t*  shifts;
+	vec_t*  stops;
 	pos_t   repeat;
+//
+//	cache
+//
+	/*const*/	pos_t	first;
+	/*const*/	pos_t	last;
+	size_t	prior;
 };
 
 

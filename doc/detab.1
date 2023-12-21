@@ -33,7 +33,7 @@ a\\tb\\tc\\td\\te\\tf\\tg
 .br
 a  b  c   d   e      f      g
 .SH BUGS
+.TP
 Doesn't make any allowance for backspace characters.
-
-The implementation of enumerated tab stops requires an array of \fIline length\fR bytes and enumerated tab stops cannot be more than separated by more than \fI255\fR character position.
-
+.TP
+Enumerated tab positions can be set from 1 to UINT16_MAX but otherwise no restrictions.
