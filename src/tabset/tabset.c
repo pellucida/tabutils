@@ -114,27 +114,23 @@ pos_t	tabset_next (tabset_t* ts, pos_t pos) {
 	pos_t	last	= ts->last;
 	size_t	prior	= ts->prior;
 
-// /*D*/	fprintf (stderr, "prior = %zu used = %u first = %u last = %u\n", prior, used, first, last);
 // First test the common edge cases
 //  1. No enumerated tabs or beyond last enumerated tab position
-	if (used==0 || pos > last) {
+	if (used==0 || pos >= last) {
 		prior	= 0;
 		nextpos	= tabs_repeat (pos, ts->repeat);
-// /*D*/	fprintf (stderr, "prior = %zu nextpos = %u first = %u last = %u\n", prior, nextpos, first, last);
-	} // else used>0 and pos <= last
+	} // else used>0 and pos < last
 //  2. At the start of the line
-	else if (pos < first) {
+	else if (pos < first) { // NB not pos <= first
 		prior	= 0;
 		nextpos	= first;
-// /*D*/	fprintf (stderr, "2. prior = %zu nextpos = %u first = %u last = %u\n", prior, nextpos, first, last);
 
-	} // else pos >= first and used>0 and pos <= last ==> first!=last ==> used>1
+	} // else pos>=first and pos < last ==> first!=last ==> used>1
 // 
-	else {	
 
 // At this point we have
-// 	pos >= first and used>1 and pos <= last
-//	stops[0] < pos <= stops[used-1]
+// 	pos >= first and used>0 and pos < last
+//	stops[0] <= pos < stops[used-1]
 //
 // We have cached first =def stops[0], last =def stops[used-1]
 // and prior caches the previous tab stop returned 
@@ -145,11 +141,12 @@ pos_t	tabset_next (tabset_t* ts, pos_t pos) {
 // Otherwise if pos > stops[prior+1] we can search [prior+1..used-1]
 // Else search [0..used-1]
 
+	else {	
+
 		size_t	i	= 0;
 		size_t	j	= used-1;
 		bool	found	= false;
 		pos_t	prival	= vec_at (stops, prior);
-// /*D*/	fprintf (stderr, "prior = %zu prival = %u first = %u last = %u\n", prior, prival, first, last);
 		if (prival < pos) { // stops[prior] < pos
 			pos_t	nextval	= vec_at (stops, prior+1);
 			i	= prior; // We can start search here 

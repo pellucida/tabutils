@@ -73,7 +73,6 @@ int	main (int argc, char* argv[]) {
 		}
 		else if (ch == '\t') {
 			pos_t	tabpos	= tabset_next (tabset, p);
-// /*D*/	fprintf (stderr, "tabpos_next (%u) = %u\n", p, tabpos);
 			if (p < tabpos) {
 				spaces (output, tabpos-p);
 				p	= tabpos;
