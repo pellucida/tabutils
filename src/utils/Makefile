@@ -1,5 +1,5 @@
 
-CFLAGS	+= -g -I.. -Delt_t=uint8_t
+CFLAGS	+= -Wall -g -I.. -Delt_t=uint8_t
 
 all:	utils.o
 

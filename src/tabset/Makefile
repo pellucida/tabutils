@@ -1,5 +1,5 @@
 
-CFLAGS	+= -I.. -Delt_t=uint16_t -g
+CFLAGS	+= -Wall -I.. -Delt_t=uint16_t -g
 
 OBJ	= tabset.o tabset_errors.o
 

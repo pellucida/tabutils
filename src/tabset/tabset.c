@@ -106,7 +106,6 @@ static	size_t	vec_locate (vec_t* stops, size_t i, size_t j, pos_t pos) {
 }
 
 pos_t	tabset_next (tabset_t* ts, pos_t pos) {
-	result_t	result	= ok;
 	pos_t	nextpos	= 0;
 	vec_t*	stops	= ts->stops;
 	size_t	used	= vec_used (stops);

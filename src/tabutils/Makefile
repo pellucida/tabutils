@@ -1,5 +1,5 @@
 
-CFLAGS	+= -I.. -g -Delt_t=uint8_t 
+CFLAGS	+= -Wall -I.. -g -Delt_t=uint8_t 
 
 OBJ	= detab.o entab.o tabutils_errors.o
 
