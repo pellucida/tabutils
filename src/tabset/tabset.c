@@ -166,7 +166,6 @@ pos_t	tabset_next (tabset_t* ts, pos_t pos) {
 			nextpos	= vec_at (stops, j);
 			prior	= j;
 		}
-		nextpos;
 	}
 	ts->prior	= prior;
 	return	nextpos;

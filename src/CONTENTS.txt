@@ -54,7 +54,7 @@ and adding -DVEC_UNSAFE will not check bounds.
 
 Defects:
 	_next is basically built on a binary search on a vec instance
-	which is trading space (and simplicity) for CPU (and complexit.)
+	which is trading space (and simplicity) for CPU (and complexity.)
 	Special casing common condition means the search is rarely invoked.
 	
 [errors]
