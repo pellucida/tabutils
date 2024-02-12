@@ -43,22 +43,23 @@ but no other restrictions.
 
 The handling of embedded tabs by **entab** is a hack at best.
 
-The output of the ncurses-5.9-14.20130511 **tabs** program on RHEL7 doesn't as expected or the same as on RHEL8 - specifically **tabs -8** which confused me greatly.
+The output of the ncurses-5.9-14.20130511 **tabs** program on RHEL7 doesn't appear as I expected nor was the same as the output from **tabs** on RHEL8 - specifically **tabs -8** which confused me greatly.
 
 ````
 tabs -8
 printf "12345678901234567890\n123\tX\tY\n"
 12345678901234567890
-123	   X   	   Y
+123    X       Y
 ````
 
-A fresh terminal gives the expected
+A fresh terminal or *tput reset* gives the expected
 
 ````
 12345678901234567890
 123     X       Y
 ````
 
+Building ncurses-6.3 on RHEL7 has **tabs** produces the expected (correct) output.
 #### See Also
 
 1. [ Software tools in Pascal](https://openlibrary.org/books/OL4258115M/Software_tools_in_Pascal) pages 41 (detab) and 33 (entab)   [Software Tools in Pascal Source Code](https://github.com/jchenry/software-tools)
