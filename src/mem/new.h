@@ -49,6 +49,6 @@ static	inline	result_t	_Resize_Vec (void* v, size_t n, size_t size){
 }
 		
 # define	New( p)	(_New (&(p), sizeof(*(p))))
-# define	New_Vec( v, n)	(_New_Vec (&(v), (n), sizeof(*v])))
+# define	New_Vec( v, n)	(_New_Vec (&(v), (n), sizeof(*v)))
 # define	Resize_Vec( v, n)	(_Resize_Vec (&(v), (n), sizeof(*v)))
 # endif

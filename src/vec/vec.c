@@ -110,14 +110,19 @@ result_t	vec_insert (vec_t* ts, size_t i, elt_t x) {
 	
 	size_t	used	= ts->used;
 	if (i < used) {
-		typeof(ts->vec)	vec	= ts->vec;
-		size_t	j	= used;
-		for (; j > i; --j) {
-			vec [j]	= vec [j-1];
+		if (used >= ts->size) {
+			result	= vec_grow (ts, used+1);
 		}
-		vec [i]	= x;
-		ts->used++;
-		result	= ok;
+		if (result==ok) {
+			typeof(ts->vec)	vec	= ts->vec;
+			size_t	j	= used;
+			for (; j > i; --j) {
+				vec [j]	= vec [j-1];
+			}
+			vec [i]	= x;
+			ts->used++;
+			result	= ok;
+		}
 	}
 	return	result;
 }
